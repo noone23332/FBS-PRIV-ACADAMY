@@ -1,91 +1,442 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FBS Private Academy | Secure Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FBS Private Academy</title>
 <style>
-:root{--bg:#f5f2eb;--paper:#fffefa;--ink:#1b1b18;--muted:#858177;--gold:#c5a66b;--line:#e9e3d8;--dark:#1b1b18}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}
-.login{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 18% 15%,#454035,#1b1b18 58%,#10100f)}
-.card{width:min(470px,100%);background:var(--paper);border-radius:24px;padding:34px;box-shadow:0 25px 90px #0007}.mark{width:54px;height:54px;border:1px solid var(--gold);border-radius:16px;display:grid;place-items:center;color:var(--gold);font:26px Georgia;margin-bottom:22px}
-.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#a98b56;font-weight:800}h1{font:36px/1.1 Georgia,serif;margin:10px 0}h2{font:26px Georgia,serif;margin:8px 0}p{line-height:1.6}.muted{color:var(--muted);font-size:13px}
-.roles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}.role{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff;text-align:left;color:var(--ink)}.role.active{border:1.5px solid var(--gold);background:#fbf7ed;box-shadow:0 0 0 3px #c5a66b18}.role .symbol{font-size:23px;display:block;margin-bottom:10px}.role strong{display:block;font:17px Georgia}.role small{color:#888;font-size:10px}
-.field{display:grid;gap:7px;margin:15px 0}.field label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#777;font-weight:800}.field input{border:1px solid var(--line);background:white;border-radius:10px;padding:13px;outline:none}.field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px #c5a66b20}.primary{background:var(--dark);color:#fff;border:0;border-radius:10px;padding:14px 18px;font-weight:750;width:100%}.primary:hover{background:#3a382f}.hint{font-size:10px;color:#999;margin-top:13px}.error{color:#a34d43;font-size:12px;min-height:18px}
-.app{display:none;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:245px;background:#1b1b18;color:white;padding:25px 18px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:11px;border-bottom:1px solid #ffffff20;padding:0 4px 23px}.brand .mark{width:42px;height:42px;margin:0;font-size:19px;border-radius:12px}.brand b{font:18px Georgia}.brand small{display:block;color:#cbb98f;font-size:9px;letter-spacing:.12em}.navlabel{font-size:9px;color:#777;padding:25px 9px 9px;letter-spacing:.2em}.nav button{display:block;width:100%;padding:12px;border:0;border-radius:9px;background:none;color:#bbb;text-align:left;font-size:12px}.nav button.active,.nav button:hover{background:#ffffff14;color:#f0d7a5}.sidefoot{margin-top:auto;border-top:1px solid #ffffff20;padding:17px 8px;color:#999;font-size:10px;line-height:1.7}
-.main{margin-left:245px;padding:30px;max-width:1400px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;color:#999;font-size:11px;text-transform:uppercase;letter-spacing:.12em}.userchip{color:#555;letter-spacing:0;text-transform:none;display:flex;align-items:center;gap:9px}.avatar{background:#e9ddc6;color:#70582f;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:16px Georgia}
-.page{display:none}.page.active{display:block}.heading{margin-bottom:23px}.heading h1{font-size:36px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.panelhead h3{font:20px Georgia;margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.stat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px}.stat small{color:#999;text-transform:uppercase;letter-spacing:.12em;font-size:9px}.stat strong{display:block;font:29px Georgia;margin-top:9px}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}.field.wide{grid-column:1/-1}.btn{border:1px solid var(--line);background:white;border-radius:9px;padding:10px 13px;font-size:11px;font-weight:700}.btn.gold{background:var(--gold);border-color:var(--gold)}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:white}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);white-space:nowrap}th{font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#999}.badge{display:inline-block;border-radius:20px;background:#f1eadc;color:#78613b;padding:5px 9px;font-size:9px}.notice{background:#f8f3e7;border:1px solid #eadfc8;border-radius:11px;padding:13px;color:#746344;font-size:11px;line-height:1.6}.empty{text-align:center;color:#999;padding:25px;font-size:12px}.lesson{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.lesson:last-child{border:0}.lesson small{color:#999}.toast{position:fixed;bottom:20px;right:20px;background:#222;color:white;padding:12px 16px;border-radius:9px;opacity:0;transition:.2s}.toast.show{opacity:1}
-@media(max-width:760px){.side{width:65px;padding:18px 8px}.brand{padding:0 2px 18px}.brand>div:last-child,.navlabel,.nav button span,.sidefoot{display:none}.brand .mark{width:45px;height:45px}.nav button{text-align:center;padding:14px 3px;font-size:18px}.main{margin-left:65px;padding:20px 13px}.grid{grid-template-columns:1fr 1fr}.top{font-size:9px}.formgrid{grid-template-columns:1fr}.field.wide{grid-column:auto}}
+*{box-sizing:border-box}
+body{margin:0;background:#101114;color:#f5f0e7;font-family:Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+header{padding:22px;text-align:center;border-bottom:1px solid #b49a68}
+header h1{font-family:Georgia,serif;letter-spacing:3px;margin:0;color:#d9c49b}
+header p{color:#aaa;font-size:12px;letter-spacing:2px}
+main{max-width:1000px;margin:30px auto;padding:16px}
+.panel{background:#1c1d21;border:1px solid #39352e;border-radius:14px;padding:24px;margin-bottom:18px}
+h2,h3{font-family:Georgia,serif;color:#d9c49b}
+input,textarea{width:100%;padding:13px;margin:7px 0 15px;border-radius:7px;border:1px solid #555;background:#111;color:white}
+textarea{min-height:120px;resize:vertical}
+label{font-size:13px;color:#ccc}
+button{background:#c4a875;color:#171717;border:0;padding:12px 18px;border-radius:7px;font-weight:bold}
+button:hover{opacity:.85}
+.secondary{background:#353535;color:white}
+.danger{background:#8b3434;color:white}
+.hidden{display:none!important}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tabs button{flex:1;min-width:120px}
+.tabs button.active{background:#f0dfbd}
+.notice{color:#e5c88d;font-size:13px;line-height:1.5}
+.error{color:#ff8b8b}
+.success{color:#a5e6ad}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:12px 8px;border-bottom:1px solid #444;text-align:left}
+th{color:#d9c49b}
+.lesson{display:flex;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #444}
+.lesson small{color:#aaa}
+.day{margin-top:18px}
+footer{text-align:center;color:#777;padding:25px;font-size:12px}
+@media(max-width:600px){main{padding:10px}.panel{padding:16px}table{font-size:11px}td,th{padding:8px 4px}}
 </style>
 </head>
 <body>
-<div class="login" id="login">
- <div class="card">
-  <div class="mark">F</div><div class="eyebrow">FBS · Private Academy</div>
-  <h1>Welcome to your academy.</h1><p class="muted">Choose your access type to continue to the 6TA student portal.</p>
-  <div class="roles">
-   <button class="role active" id="adminChoice" type="button"><span class="symbol">♜</span><strong>Administrator</strong><small>Account management</small></button>
-   <button class="role" id="userChoice" type="button"><span class="symbol">✧</span><strong>User</strong><small>Student portal</small></button>
-  </div>
-  <form id="loginForm">
-   <div class="field"><label>Username</label><input id="loginName" autocomplete="username" placeholder="Enter username" required></div>
-   <div class="field"><label>Password</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="Enter password" required></div>
-   <button class="primary" type="submit">Sign in&nbsp; →</button><div class="error" id="loginError"></div>
-  </form>
-  <p class="hint">This downloadable preview stores accounts on this browser only. Public multi-device accounts require secure hosting and a database.</p>
- </div>
+
+<header>
+<h1>FBS PRIVATE ACADEMY</h1>
+<p>EXCELLENCE • KNOWLEDGE • SUCCESS</p>
+</header>
+
+<main>
+<section id="loginPanel" class="panel">
+<h2>Welcome to FBS</h2>
+<p>Choose your account type to sign in.</p>
+<div class="tabs">
+<button id="adminChoice" class="active" type="button">Administrator</button>
+<button id="studentChoice" class="secondary" type="button">Student</button>
 </div>
-<div class="app" id="app">
- <aside class="side"><div class="brand"><div class="mark">F</div><div><b>FBS Academy</b><small>PRIVATE STUDENT PORTAL</small></div></div>
-  <div class="navlabel">MENU</div><nav class="nav" id="nav"></nav><div class="sidefoot">YEAR 6TA · 2026–2027<br>Academic excellence, every day.</div>
- </aside>
- <main class="main"><div class="top"><span id="crumb">Overview</span><span class="userchip"><span class="avatar" id="avatar">F</span><span id="who">FBS User</span></span></div>
-  <section class="page active" id="adminHome">
-   <div class="heading"><div class="eyebrow">Administrator workspace</div><h1>Account management.</h1><p class="muted">Create and manage student logins. Student grades are not available in the administrator area.</p></div>
-   <div class="grid">
-    <div class="stat"><small>Student accounts</small><strong id="studentCount">0</strong></div>
-    <div class="stat"><small>Access level</small><strong style="font-size:20px">Admin</strong></div>
-    <div class="stat"><small>Grade visibility</small><strong style="font-size:20px">Restricted</strong></div>
-   </div>
-   <div class="panel" style="margin-top:16px"><div class="panelhead"><h3>Create a student account</h3><span class="badge">USER ACCESS</span></div>
-    <form id="createForm" class="formgrid">
-     <div class="field"><label>Student first name</label><input id="firstName" placeholder="e.g. Yazan" required></div>
-     <div class="field"><label>Student last name</label><input id="lastName" placeholder="e.g. Farag" required></div>
-     <div class="field"><label>Username</label><input id="newUsername" placeholder="e.g. yazan.farag123" required></div>
-     <div class="field"><label>Temporary password</label><input id="newPassword" placeholder="Create a password" required minlength="6"></div>
-     <div class="field wide"><button class="primary" type="submit">＋ Create student account</button></div>
-    </form>
-    <div class="notice">Share the username and temporary password privately with your friend. This demo does not send invitations or emails.</div>
-   </div>
-   <div class="panel"><div class="panelhead"><h3>Student accounts</h3><span class="muted" id="accountCount">0 accounts</span></div><div class="tablewrap"><table><thead><tr><th>Student</th><th>Username</th><th>Role</th><th>Action</th></tr></thead><tbody id="accounts"></tbody></table></div></div>
-  </section>
-  <section class="page" id="studentHome">
-   <div class="heading"><div class="eyebrow">Your student workspace · 6TA</div><h1 id="studentGreeting">Welcome.</h1><p class="muted">Your timetable and personal study space.</p></div>
-   <div class="notice">You are signed in as a student. You can access your own learning tools. Administrator accounts cannot view student grades.</div>
-   <div class="panel" style="margin-top:16px"><div class="panelhead"><h3>Year 6TA timetable</h3><span class="badge">SUNDAY – THURSDAY</span></div><div id="studentSchedule"></div></div>
-   <div class="panel"><div class="panelhead"><h3>My homework notes</h3><span class="muted">Saved on this browser</span></div><textarea id="studentNotes" style="width:100%;min-height:180px;border:1px solid var(--line);border-radius:10px;padding:13px;background:#fffefa;font:14px/1.7 Georgia;resize:vertical" placeholder="Write your homework and reminders here..."></textarea></div>
-  </section>
- </main>
+<form id="loginForm">
+<label for="username">Username</label>
+<input id="username" autocomplete="username" required placeholder="Enter your username">
+<label for="password">Password</label>
+<input id="password" type="password" autocomplete="current-password" required placeholder="Enter your password">
+<button type="submit">Sign in</button>
+<p id="loginMessage" class="error" role="alert"></p>
+</form>
+<p class="notice">Student accounts are created by the administrator.</p>
+</section>
+
+<section id="appPanel" class="hidden">
+<div class="panel">
+<p class="notice" id="roleLabel"></p>
+<h2 id="welcomeTitle">Welcome</h2>
+<button class="secondary" id="logoutButton" type="button">Sign out</button>
 </div>
-<div class="toast" id="toast"></div>
+
+<section id="adminArea" class="hidden">
+<div class="panel">
+<h2>Student Accounts</h2>
+<p>Create and manage student usernames and passwords.</p>
+<form id="createForm">
+<label for="firstName">Student first name</label>
+<input id="firstName" required placeholder="e.g. Yazan">
+<label for="lastName">Student last name</label>
+<input id="lastName" required placeholder="e.g. Farag">
+<label for="studentPassword">Temporary password</label>
+<input id="studentPassword" required minlength="4" placeholder="Create a password">
+<button type="submit">Create student account</button>
+</form>
+<p id="createMessage" class="notice"></p>
+</div>
+<div class="panel">
+<h2>Account List</h2>
+<div style="overflow-x:auto">
+<table>
+<thead><tr><th>Student</th><th>Username</th><th>Action</th></tr></thead>
+<tbody id="accountList"></tbody>
+</table>
+</div>
+<p id="accountCount" class="notice"></p>
+</div>
+</section>
+
+<section id="studentArea" class="hidden">
+<div class="panel">
+<h2>My Dashboard</h2>
+<p id="studentGreeting">Welcome to your student portal.</p>
+<p class="notice">Your personal school space.</p>
+</div>
+
+<div class="panel">
+<h2>My Timetable</h2>
+<div id="timetable"></div>
+</div>
+
+<div class="panel">
+<h2>My Homework Notebook</h2>
+<p>Write down your homework and save it on this device.</p>
+<textarea id="homework" placeholder="Write your homework here..."></textarea>
+<button id="saveHomework" type="button">Save homework</button>
+<p id="homeworkMessage" class="notice"></p>
+</div>
+</section>
+</section>
+</main>
+
+<footer>FBS PRIVATE ACADEMY • STUDENT PORTAL</footer>
+
 <script>
-const ADMIN_USER='fbs.admin.yazan26', ADMIN_PASS='FBSAdmin!2026';
-let role='admin', current=null;
-const defaultUsers=[];
-const getUsers=()=>JSON.parse(localStorage.getItem('fbsPublicDemoUsers')||'[]');
-const setUsers=u=>localStorage.setItem('fbsPublicDemoUsers',JSON.stringify(u));
-const $=id=>document.getElementById(id);
-function choose(r){role=r;$('adminChoice').classList.toggle('active',r==='admin');$('userChoice').classList.toggle('active',r==='user');$('loginError').textContent=''}
-$('adminChoice').onclick=()=>choose('admin');$('userChoice').onclick=()=>choose('user');
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2300)}
-$('loginForm').onsubmit=e=>{e.preventDefault();let u=$('loginName').value.trim(),p=$('loginPass').value; if(role==='admin'){if(u===ADMIN_USER&&p===ADMIN_PASS){current={role:'admin',name:'FBS Administrator',username:u};openApp()}else $('loginError').textContent='Administrator username or password is incorrect.'}else{let found=getUsers().find(x=>x.username.toLowerCase()===u.toLowerCase()&&x.password===p);if(found){current={...found,role:'user'};openApp()}else $('loginError').textContent='Student username or password is incorrect. Ask the administrator to create your account.'}};
-function openApp(){$('login').style.display='none';$('app').style.display='block';$('who').textContent=current.name;$('avatar').textContent=current.name[0].toUpperCase();if(current.role==='admin'){ $('nav').innerHTML='<button class="active" data-id="adminHome">♜ &nbsp; <span>Accounts</span></button><button id="signout">↪ &nbsp; <span>Sign out</span></button>'; $('adminHome').classList.add('active');$('studentHome').classList.remove('active');renderAccounts()}else{$('nav').innerHTML='<button class="active" data-id="studentHome">⌂ &nbsp; <span>My dashboard</span></button><button id="signout">↪ &nbsp; <span>Sign out</span></button>';$('adminHome').classList.remove('active');$('studentHome').classList.add('active');$('studentGreeting').textContent='Welcome, '+current.name.split(' ')[0]+'.';renderSchedule();$('studentNotes').value=localStorage.getItem('fbsNotes_'+current.username)||''} $('signout').onclick=logout}
-function logout(){current=null;$('app').style.display='none';$('login').style.display='grid';$('loginPass').value='';$('loginError').textContent=''}
-$('createForm').onsubmit=e=>{e.preventDefault();let first=$('firstName').value.trim(),last=$('lastName').value.trim(),username=$('newUsername').value.trim(),password=$('newPassword').value;if(getUsers().some(x=>x.username.toLowerCase()===username.toLowerCase())||username.toLowerCase()===ADMIN_USER.toLowerCase()){toast('That username is already taken.');return}let users=getUsers();users.push({name:first+' '+last,username,password});setUsers(users);e.target.reset();renderAccounts();toast('Student account created. Share the login privately.')};
-function renderAccounts(){let users=getUsers();$('studentCount').textContent=users.length;$('accountCount').textContent=users.length+' accounts';$('accounts').innerHTML=users.length?users.map((u,i)=>`<tr><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.username)}</td><td><span class="badge">USER</span></td><td><button class="btn" data-remove="${i}">Remove</button></td></tr>`).join(''):'<tr><td colspan="4" class="empty">No student accounts yet. Create the first one above.</td></tr>';$('accounts').querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{if(confirm('Remove this student account?')){let a=getUsers();a.splice(+b.dataset.remove,1);setUsers(a);renderAccounts();toast('Account removed.')}})}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-const timetable={Sunday:[['8:05–8:45','I.T.'],['8:45–9:25','I.T.'],['9:25–10:05','Arabic'],['10:30–11:10','Maths'],['11:10–11:50','N.S.'],['11:50–12:30','Science'],['12:30–1:10','Science'],['1:50–2:30','English'],['2:30–3:10','English']],Monday:[['8:05–8:45','Arabic'],['8:45–9:25','Arabic'],['9:25–10:05','German'],['10:30–11:10','P.E.'],['11:10–11:50','P.E.'],['11:50–12:30','N.S.'],['12:30–1:10','English'],['1:50–2:30','Maths'],['2:30–3:10','Maths']],Tuesday:[['8:05–8:45','Maths'],['8:45–9:25','Maths'],['9:25–10:05','Music'],['10:30–11:10','French'],['11:10–11:50','English'],['11:50–12:30','Arabic'],['12:30–1:10','Science'],['1:50–2:30','Religion'],['2:30–3:10','G.P.']],Wednesday:[['8:05–8:45','English'],['8:45–9:25','English'],['9:25–10:05','G.P.'],['10:30–11:10','Science'],['11:10–11:50','Arabic'],['11:50–12:30','French'],['12:30–1:10','Maths'],['1:50–2:30','N.S.'],['2:30–3:10','Drama']],Thursday:[['8:05–8:45','Arabic'],['8:45–9:25','English'],['9:25–10:05','Religion'],['10:05–10:45','Maths'],['11:25–12:05','Art'],['12:05–12:45','Art'],['12:45–1:30','G.P.'],['1:30–2:30','After-school activity / clinic']]};
-function renderSchedule(){$('studentSchedule').innerHTML=Object.entries(timetable).map(([d,lessons])=>`<div style="margin-bottom:15px"><b style="font:18px Georgia">${d}</b>${lessons.map(x=>`<div class="lesson"><span>${x[1]}</span><small>${x[0]}</small></div>`).join('')}</div>`).join('')}
-$('studentNotes').addEventListener('input',()=>{localStorage.setItem('fbsNotes_'+current.username,$('studentNotes').value)});
+"use strict";
+
+const ADMIN_USERNAME = "fbs.admin.yazan26";
+const ADMIN_PASSWORD = "FBSAdmin!2026";
+
+const $ = id => document.getElementById(id);
+
+let selectedRole = "admin";
+let currentUser = null;
+
+function readAccounts(){
+  try {
+    const data = JSON.parse(localStorage.getItem("fbs_student_accounts") || "[]");
+    return Array.isArray(data) ? data : [];
+  } catch(error) {
+    return [];
+  }
+}
+
+function saveAccounts(accounts){
+  localStorage.setItem("fbs_student_accounts", JSON.stringify(accounts));
+}
+
+function showLogin(){
+  currentUser = null;
+  $("loginPanel").classList.remove("hidden");
+  $("appPanel").classList.add("hidden");
+  $("adminArea").classList.add("hidden");
+  $("studentArea").classList.add("hidden");
+  $("password").value = "";
+  $("loginMessage").textContent = "";
+}
+
+function chooseRole(role){
+  selectedRole = role;
+  $("adminChoice").classList.toggle("active", role === "admin");
+  $("studentChoice").classList.toggle("active", role === "student");
+  $("adminChoice").classList.toggle("secondary", role !== "admin");
+  $("studentChoice").classList.toggle("secondary", role !== "student");
+  $("loginMessage").textContent = "";
+}
+
+$("adminChoice").addEventListener("click", () => chooseRole("admin"));
+$("studentChoice").addEventListener("click", () => chooseRole("student"));
+
+$("loginForm").addEventListener("submit", function(event){
+  event.preventDefault();
+
+  const username = $("username").value.trim();
+  const password = $("password").value;
+
+  if(selectedRole === "admin"){
+    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
+      currentUser = {
+        role:"admin",
+        name:"FBS Administrator"
+      };
+      openDashboard();
+    } else {
+      $("loginMessage").textContent = "Incorrect administrator username or password.";
+    }
+    return;
+  }
+
+  const account = readAccounts().find(item =>
+    item.username.toLowerCase() === username.toLowerCase() &&
+    item.password === password
+  );
+
+  if(!account){
+    $("loginMessage").textContent = "Incorrect student username or password.";
+    return;
+  }
+
+  currentUser = {
+    role:"student",
+    name:account.name,
+    username:account.username
+  };
+
+  openDashboard();
+});
+
+function openDashboard(){
+  $("loginPanel").classList.add("hidden");
+  $("appPanel").classList.remove("hidden");
+  $("welcomeTitle").textContent = "Welcome, " + currentUser.name;
+  $("roleLabel").textContent =
+    currentUser.role === "admin" ? "ADMINISTRATOR ACCOUNT" : "STUDENT ACCOUNT";
+
+  if(currentUser.role === "admin"){
+    $("adminArea").classList.remove("hidden");
+    $("studentArea").classList.add("hidden");
+    renderAccounts();
+  } else {
+    $("studentArea").classList.remove("hidden");
+    $("adminArea").classList.add("hidden");
+    $("studentGreeting").textContent = "Welcome, " + currentUser.name + "!";
+    renderTimetable();
+    loadHomework();
+  }
+}
+
+$("logoutButton").addEventListener("click", showLogin);
+
+function makeUsername(first, last){
+  const cleanFirst = first.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const cleanLast = last.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const base = cleanFirst + "." + cleanLast;
+
+  let username = base + "123";
+  let number = 124;
+  const accounts = readAccounts();
+
+  while(accounts.some(account =>
+    account.username.toLowerCase() === username.toLowerCase()
+  ) || username.toLowerCase() === ADMIN_USERNAME.toLowerCase()){
+    username = base + number;
+    number++;
+  }
+
+  return username;
+}
+
+$("createForm").addEventListener("submit", function(event){
+  event.preventDefault();
+
+  if(!currentUser || currentUser.role !== "admin") return;
+
+  const first = $("firstName").value.trim();
+  const last = $("lastName").value.trim();
+  const password = $("studentPassword").value;
+
+  if(!first || !last || password.length < 4){
+    $("createMessage").textContent = "Please enter all details and a password of at least 4 characters.";
+    return;
+  }
+
+  const accounts = readAccounts();
+  const username = makeUsername(first, last);
+
+  accounts.push({
+    name:first + " " + last,
+    username:username,
+    password:password
+  });
+
+  saveAccounts(accounts);
+  this.reset();
+
+  $("createMessage").innerHTML =
+    "Account created! Username: <strong>" + escapeHTML(username) +
+    "</strong>. Give the username and password privately to the student.";
+
+  renderAccounts();
+});
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[character]);
+}
+
+function renderAccounts(){
+  const accounts = readAccounts();
+  $("accountCount").textContent = accounts.length + " student account(s)";
+
+  $("accountList").innerHTML = "";
+
+  if(accounts.length === 0){
+    $("accountList").innerHTML =
+      '<tr><td colspan="3">No student accounts created yet.</td></tr>';
+    return;
+  }
+
+  accounts.forEach((account, index) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = account.name;
+
+    const usernameCell = document.createElement("td");
+    usernameCell.textContent = account.username;
+
+    const actionCell = document.createElement("td");
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.className = "danger";
+    removeButton.type = "button";
+
+    removeButton.addEventListener("click", () => {
+      if(!confirm("Remove this student account?")) return;
+
+      const updated = readAccounts();
+      updated.splice(index, 1);
+      saveAccounts(updated);
+      renderAccounts();
+    });
+
+    actionCell.appendChild(removeButton);
+    row.append(nameCell, usernameCell, actionCell);
+    $("accountList").appendChild(row);
+  });
+}
+
+const timetable = {
+  Sunday:[
+    ["8:05–8:45","I.T."],
+    ["8:45–9:25","I.T."],
+    ["9:25–10:05","Arabic"],
+    ["10:30–11:10","Maths"],
+    ["11:10–11:50","N.S."],
+    ["11:50–12:30","Science"],
+    ["12:30–1:10","Science"],
+    ["1:50–2:30","English"],
+    ["2:30–3:10","English"]
+  ],
+  Monday:[
+    ["8:05–8:45","Arabic"],
+    ["8:45–9:25","Arabic"],
+    ["9:25–10:05","German"],
+    ["10:30–11:10","P.E."],
+    ["11:10–11:50","P.E."],
+    ["11:50–12:30","N.S."],
+    ["12:30–1:10","English"],
+    ["1:50–2:30","Maths"],
+    ["2:30–3:10","Maths"]
+  ],
+  Tuesday:[
+    ["8:05–8:45","Maths"],
+    ["8:45–9:25","Maths"],
+    ["9:25–10:05","Music"],
+    ["10:30–11:10","French"],
+    ["11:10–11:50","English"],
+    ["11:50–12:30","Arabic"],
+    ["12:30–1:10","Science"],
+    ["1:50–2:30","Religion"],
+    ["2:30–3:10","G.P."]
+  ],
+  Wednesday:[
+    ["8:05–8:45","English"],
+    ["8:45–9:25","English"],
+    ["9:25–10:05","G.P."],
+    ["10:30–11:10","Science"],
+    ["11:10–11:50","Arabic"],
+    ["11:50–12:30","French"],
+    ["12:30–1:10","Maths"],
+    ["1:50–2:30","N.S."],
+    ["2:30–3:10","Drama"]
+  ],
+  Thursday:[
+    ["8:05–8:45","Arabic"],
+    ["8:45–9:25","English"],
+    ["9:25–10:05","Religion"],
+    ["10:05–10:45","Maths"],
+    ["11:25–12:05","Art"],
+    ["12:05–12:45","Art"],
+    ["12:45–1:30","G.P."],
+    ["1:30–2:30","After-school activity / clinic"]
+  ]
+};
+
+function renderTimetable(){
+  const container = $("timetable");
+  container.innerHTML = "";
+
+  Object.entries(timetable).forEach(([day, lessons]) => {
+    const section = document.createElement("div");
+    section.className = "day";
+
+    const heading = document.createElement("h3");
+    heading.textContent = day;
+    section.appendChild(heading);
+
+    lessons.forEach(([time, subject]) => {
+      const lesson = document.createElement("div");
+      lesson.className = "lesson";
+
+      const subjectText = document.createElement("span");
+      subjectText.textContent = subject;
+
+      const timeText = document.createElement("small");
+      timeText.textContent = time;
+
+      lesson.append(subjectText, timeText);
+      section.appendChild(lesson);
+    });
+
+    container.appendChild(section);
+  });
+}
+
+function homeworkKey(){
+  return "fbs_homework_" + currentUser.username;
+}
+
+function loadHomework(){
+  $("homework").value = localStorage.getItem(homeworkKey()) || "";
+  $("homeworkMessage").textContent = "";
+}
+
+$("saveHomework").addEventListener("click", () => {
+  if(!currentUser || currentUser.role !== "student") return;
+
+  localStorage.setItem(homeworkKey(), $("homework").value);
+  $("homeworkMessage").textContent = "Homework saved on this device!";
+});
 </script>
-</body></html>
+</body>
+</html>
